@@ -1,0 +1,47 @@
+<div *ngIf="true" class="modal-container">
+    <div class="modal-content">
+      <h3>Filtrar vuelos</h3>
+      <form>
+        <label>Origen:</label>
+        <input type="text" [(ngModel)]="criterios.origen" name="origen" />
+  
+        <label>Destino:</label>
+        <input type="text" [(ngModel)]="criterios.destino" name="destino" />
+  
+        <div class="input-group">
+          <div>
+            <label>Horario:</label>
+            <input type="time" [(ngModel)]="criterios.horario" name="horario" />
+          </div>
+          <div>
+            <label>Tarifa máxima:</label>
+            <input type="number" [(ngModel)]="criterios.tarifa" name="tarifa" />
+          </div>
+        </div>
+  
+        <div class="input-group">
+          <div>
+            <label>Fecha:</label>
+            <input type="date" [(ngModel)]="criterios.fecha" name="fecha" />
+          </div>
+          <div>
+            <label>Aerolínea:</label>
+            <input type="text" [(ngModel)]="criterios.aerolinea" name="aerolinea" />
+          </div>
+        </div>
+  
+        <div>
+          <label>
+            <input type="checkbox" [(ngModel)]="criterios.soloDirectos" name="soloDirectos" />
+            Solo vuelos directos
+          </label>
+        </div>
+  
+        <div class="modal-buttons">
+          <button type="button" class="btn btn-success" (click)="aplicar()">Aplicar</button>
+          <button type="button" class="btn btn-danger" (click)="limpiar()">Limpiar</button>
+          <button type="button" class="btn btn-secondary" (click)="cerrarModal()">Cerrar</button>
+        </div>
+      </form>
+    </div>
+  </div>

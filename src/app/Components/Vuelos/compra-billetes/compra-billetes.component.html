@@ -1,0 +1,25 @@
+<div class="compra-billetes">
+    <div *ngIf="compra.reserva && compra.reserva.vuelo; else noReservaSeleccionada">
+      <h3>
+        Comprar billete para el vuelo: 
+        {{ compra.reserva.vuelo.Origen }} a {{ compra.reserva.vuelo.Destino }}
+      </h3>
+      <form (ngSubmit)="confirmarCompra()">
+        <label>Número de tarjeta de crédito:</label>
+        <input type="text" [(ngModel)]="compra.tarjeta" name="tarjeta" required>
+  
+        <button class="btn btn-success" type="submit">Confirmar Compra</button>
+      </form>
+    </div>
+  
+    <ng-template #noReservaSeleccionada>
+      <p>No hay reservas seleccionadas para comprar.</p>
+      <ul>
+        <li *ngFor="let r of reservas">
+          Vuelo de {{ r.vuelo?.Origen }} a {{ r.vuelo?.Destino }} - Fecha: {{ r.vuelo?.Fecha }}
+          <button class="btn btn-primary" (click)="comprarBillete(r)">Seleccionar para compra</button>
+        </li>
+      </ul>
+    </ng-template>
+  </div>
+  

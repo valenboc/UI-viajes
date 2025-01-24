@@ -1,0 +1,31 @@
+<div class="consulta-vuelos">
+  <div class="header-section">
+    <div class="button-group">
+      <button class="btn btn-secondary" (click)="sortByTarifa()">Ordenar por Tarifa</button>
+      <button class="btn btn-primary" (click)="abrirModal()">Filtrar vuelos</button>
+    </div>
+  </div>
+
+  <div *ngFor="let vuelo of filteredVuelos | paginate: { itemsPerPage: itemsPerPage, currentPage: page }" class="row-sesion shadow">
+    <div class="info-container">
+      <div class="info">Aerolínea<br /><span>{{ vuelo.Aerolinea }}</span></div>
+      <div class="info">Origen<br /><span>{{ vuelo.Origen }}</span></div>
+      <div class="info">Destino<br /><span>{{ vuelo.Destino }}</span></div>
+      <div class="info">Horario<br /><span>{{ vuelo.Horario }}</span></div>
+      <div class="info">Tarifa<br /><span>{{ vuelo.Tarifa | currency }}</span></div>
+      <div class="info">Disponibilidad<br /><span>{{ vuelo.Disponibilidad ? 'Disponible' : 'No disponible' }}</span></div>
+      <div class="info">Fecha<br /><span>{{ vuelo.Fecha }}</span></div>
+      <div class="info">Directo<br /><span>{{ vuelo.Directo ? 'Sí' : 'No' }}</span></div>
+    </div>
+    <button class="btn btn-primary" (click)="reservar(vuelo)" [disabled]="!vuelo.Disponibilidad">Reservar</button>
+  </div>
+
+  <pagination-controls (pageChange)="page = $event"></pagination-controls>
+
+  <app-filtro-modal 
+    *ngIf="mostrarModal" 
+    [(criterios)]="filtroCriterios"
+    (aplicarFiltro)="aplicarFiltro($event)" 
+    (cerrarModalEvent)="cerrarModal()">
+  </app-filtro-modal>
+</div>

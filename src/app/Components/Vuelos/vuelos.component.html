@@ -1,0 +1,36 @@
+<div class="tabs">
+  <button [class.active]="selectedTab === 'consulta'" (click)="selectTab('consulta')">Consulta de Vuelos</button>
+  <button [class.active]="selectedTab === 'reserva'" (click)="selectTab('reserva')">Reserva de Vuelos</button>
+  <button [class.active]="selectedTab === 'compra'" (click)="selectTab('compra')">Compra de Billetes</button>
+</div>
+
+<div class="content">
+  <div *ngIf="selectedTab === 'consulta'">
+    <app-consulta-vuelos 
+      [vuelos]="vuelos" 
+      [itemsPerPage]="itemsPerPage" 
+      (reservarVuelo)="reservarVuelo($event)">
+    </app-consulta-vuelos>
+
+  </div>
+
+  <!-- Reserva de Vuelos -->
+  <div *ngIf="selectedTab === 'reserva'">
+    <app-reserva-vuelos
+      [reserva]="reserva"
+      [reservas]="reservas"
+      (onReservaConfirmada)="reservaConfirmada($event)"
+      (onReservaCancelada)="reservaCancelada($event)">
+    </app-reserva-vuelos>
+  </div>
+  
+
+  <!-- Compra de Billetes -->
+  <div *ngIf="selectedTab === 'compra'">
+    <app-compra-billetes 
+      [reservas]="reservas"
+      (compraConfirmada)="compraConfirmada($event)">
+    </app-compra-billetes>
+  </div>
+</div>
+

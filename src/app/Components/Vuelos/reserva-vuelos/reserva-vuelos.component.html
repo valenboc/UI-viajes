@@ -1,0 +1,28 @@
+<div class="reserva-vuelos">
+<div *ngIf="reserva.vuelo; else noVueloReservado">
+    <h3>Reservar vuelo: {{ reserva.vuelo.Origen }} a {{ reserva.vuelo.Destino }} - {{ reserva.vuelo.Aerolinea }}</h3>
+    <form (ngSubmit)="confirmarReserva()">
+      <label>Número de pasajeros:</label>
+      <input type="number" [(ngModel)]="reserva.pasajeros" name="pasajeros" min="1" required>
+  
+      <label>Asiento (opcional):</label>
+      <input type="text" [(ngModel)]="reserva.asiento" name="asiento">
+  
+      <button class="btn btn-success" type="submit">Confirmar Reserva</button>
+    </form>
+  </div>
+  
+  <ng-template #noVueloReservado>
+    <p>No hay vuelos seleccionados para reservar.</p>
+  </ng-template>
+  
+  <div *ngIf="reservas.length">
+    <h4>Reservas realizadas</h4>
+    <ul>
+      <li *ngFor="let r of reservas">
+        Vuelo de {{ r.vuelo.Origen }} a {{ r.vuelo.Destino }} - Fecha: {{ r.vuelo.Fecha }}
+        <button class="btn btn-danger" (click)="cancelarReserva(r)">Cancelar</button>
+      </li>
+    </ul>
+  </div>
+</div>
